@@ -1,0 +1,59 @@
+<#if error.showMessageOnly >
+<blockquote>
+<font color="red">
+<b><i>${error.i18n("common.error.contact_admin_for_more_info", error.dateTimeAsString())}</i></b><br/>
+${(error.errMessage?default("-"))?html}<br/>
+${(error.excMessage?default("-"))?html}
+</font>
+</blockquote>
+<#elseif error.errorOnInclude>
+<pre>
+<b><i>${error.i18n("common.error.contact_admin_for_more_info", error.dateTimeAsString())}</i></b><br/>
+<b>${(error.errMessage?default("-"))?html}</b><br/>
+<b>${(error.excMessage?default("-"))?html}</b><br/>
+${(error.excstacktrace?default("-"))?html}
+</pre>
+<#else>
+<table>
+<tr>
+<td colspan="2">
+<b><i>${error.i18n("common.error.contact_admin_for_more_info", error.dateTimeAsString())}</i></b><br/>
+</td>
+</tr>
+<tr>
+<th colspan="2">
+${error.i18n("common.error.intercepted")}
+</th>
+</tr>
+<tr>
+<td>${error.i18n("common.error.request_uri")}</td>
+<td>${error.errRequestURI?default("-")}</td>
+</tr>
+<tr>
+<td>${error.i18n("common.error.status_code")}</td>
+<td>${error.errStatusCode?default(999)}</td>
+</tr>
+<tr>
+<td>${error.i18n("common.error.topic")}</td>
+<td>${error.errTopic?default("-")}</td>
+</tr>
+<tr>
+<td>${error.i18n("common.error.message")}</td>
+<td>${error.errMessage?default("-")}</td>
+</tr>
+<#if (error.excstacktrace)?exists >
+<tr>
+<th colspan=2>${error.i18n("common.error.exception_info")}</th>
+</tr>
+<tr>
+<td>${error.i18n("common.error.exception_message")}</td>
+<td><pre>${(error.excMessage?default("-"))?html}</pre></td>
+</tr>
+<tr>
+<td colspan=2><pre>${(error.excstacktrace?default("-"))?html}</pre></td>
+</tr>
+</#if>
+</table>
+ 
+</#if>
+
